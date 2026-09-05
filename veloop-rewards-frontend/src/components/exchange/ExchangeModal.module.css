@@ -1,0 +1,45 @@
+.overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(4, 3, 12, 0.7);
+  backdrop-filter: blur(6px);
+  display: grid; place-items: center; padding: 16px;
+}
+.modal {
+  position: relative; width: min(440px, 100%);
+  background: linear-gradient(180deg, #221c4e 0%, #141126 100%);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 20px; padding: 26px 24px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(124, 58, 237, 0.15);
+}
+.closeBtn {
+  position: absolute; top: 12px; right: 12px;
+  width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center;
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #c9cdea; cursor: pointer;
+}
+.closeBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+.closeBtn:focus-visible, .cancelBtn:focus-visible, .confirmBtn:focus-visible { outline: 2px solid #a78bfa; outline-offset: 2px; }
+.title { margin: 0; font-size: 21px; font-weight: 800; color: #fff; text-align: center; }
+.sub { margin: 6px 0 0; font-size: 13px; color: #9aa0bd; text-align: center; }
+.flowBox { margin: 18px 0 14px; background: rgba(7,6,16,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.flowRow { display: flex; align-items: center; gap: 8px; font-size: 19px; font-weight: 800; color: #c4b5fd; }
+.flowRow.ve { color: #fbbf24; }
+.flowArrow { color: #a78bfa; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; background: rgba(124,58,237,0.2); border: 1px solid rgba(124,58,237,0.4); }
+.afterGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+.afterBox { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.afterBox span { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #9aa0bd; }
+.afterBox strong { font-size: 17px; font-weight: 800; color: #fff; }
+.verifyNote { font-size: 12px; color: #9aa0bd; text-align: center; margin: 10px 0 0; }
+.errorBox { margin-top: 12px; font-size: 13px; font-weight: 600; color: #fca5a5; background: rgba(239,68,68,0.09); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 10px 12px; }
+.actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; margin-top: 16px; }
+.cancelBtn { border-radius: 12px; padding: 12px; font-weight: 700; font-size: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #e9e4ff; cursor: pointer; }
+.cancelBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+.confirmBtn { border-radius: 12px; padding: 12px; font-weight: 800; font-size: 14px; background: linear-gradient(180deg, #7c3aed, #5b21b6); border: 1px solid rgba(255,255,255,0.12); color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 20px rgba(124,58,237,0.35); }
+.confirmBtn:disabled { opacity: 0.7; cursor: wait; }
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.successWrap { text-align: center; }
+.successIcon { color: #22c55e; display: flex; justify-content: center; margin-bottom: 10px; filter: drop-shadow(0 0 18px rgba(34,197,94,0.5)); }
+.successText { color: #c9cdea; font-size: 14px; line-height: 1.7; margin: 10px 0 14px; }
+.successText strong { color: #fbbf24; font-size: 16px; }
+.successWrap .confirmBtn { width: 100%; margin-top: 16px; }

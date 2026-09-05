@@ -1,0 +1,31 @@
+.appContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.mainContent {
+  padding: 0 2rem;
+}
+
+.topSection {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.dashboardColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.activityColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 992px) {
+  .topSection {
+    grid-template-columns: 1fr;
+  }
+}

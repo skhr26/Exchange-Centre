@@ -1,0 +1,92 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  background: rgba(7,6,16,0.72);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(124,58,237,0.18);
+}
+.left { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.logoWrap { display: flex; align-items: center; gap: 10px; }
+.logoMark {
+  width: 38px; height: 38px; display: grid; place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #d97706 100%);
+  color: #1a0b00; font-weight: 900; font-size: 18px;
+  box-shadow: 0 8px 18px rgba(245,158,11,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+.logoText { display: flex; flex-direction: column; line-height: 1; }
+.brandName { font-weight: 800; letter-spacing: 0.08em; font-size: 16px; }
+.brandSub { font-size: 8px; letter-spacing: 0.28em; color: #fbbf24; font-weight: 700; opacity: 0.95; }
+
+.navPill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 4px; border-radius: 999px;
+  backdrop-filter: blur(10px);
+}
+.navPill a {
+  text-decoration: none; font-size: 13px; font-weight: 600;
+  color: var(--muted); padding: 7px 12px; border-radius: 999px; transition: all .2s;
+  white-space: nowrap;
+}
+.navPill a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.navActive { color: #fff !important; background: linear-gradient(180deg, #7c3aed, #5b21b6) !important; box-shadow: 0 6px 16px rgba(124,58,237,0.35); }
+
+.right { display: flex; align-items: center; gap: 12px; }
+.bellBtn {
+  position: relative; width: 42px; height: 42px; display: grid; place-items: center;
+  border-radius: 12px; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08); color: #fff; cursor: pointer;
+}
+.badge {
+  position: absolute; top: -6px; right: -6px;
+  width: 18px; height: 18px; border-radius: 999px;
+  background: #a855f7; color: #fff; font-size: 10px; font-weight: 800;
+  display: grid; place-items: center; border: 2px solid #070610;
+}
+
+.balanceCard {
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(180deg, rgba(26,21,58,0.98), rgba(16,12,34,0.98));
+  border: 1px solid rgba(245,158,11,0.22);
+  border-radius: 14px; padding: 8px 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  position: relative;
+}
+.walletIcon {
+  width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #1a0b00;
+}
+.balanceValue { font-weight: 800; font-size: 13px; line-height: 1; }
+.balanceLabel { font-size: 10px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; }
+.liveDot { width: 8px; height: 8px; border-radius: 999px; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.8); }
+
+.profileCard {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 6px 10px 6px 6px;
+}
+.avatar { width: 32px; height: 32px; border-radius: 999px; background: #fff; border: 2px solid rgba(124,58,237,0.3); }
+.profileMeta { line-height: 1; }
+.hi { font-weight: 700; font-size: 13px; }
+.levelRow { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 3px; }
+.levelTrack { width: 56px; height: 4px; border-radius: 999px; background: rgba(255,255,255,0.12); overflow: hidden; }
+.levelFill { width: 62%; height: 100%; background: linear-gradient(90deg, #7c3aed, #f59e0b); }
+.sparkle { color: #fbbf24; opacity: 0.9; }
+
+@media (max-width: 1100px) {
+  .navPill { display: none; }
+}
+@media (max-width: 640px) {
+  .balanceCard { display: none; }
+  .hi { display: none; }
+  .levelRow { display: none; }
+}

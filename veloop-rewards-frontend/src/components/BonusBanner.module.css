@@ -1,0 +1,20 @@
+.banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: linear-gradient(90deg, rgba(26,21,58,0.95) 0%, rgba(45,30,10,0.92) 50%, rgba(26,21,58,0.95) 100%);
+  border: 1px solid rgba(245,158,11,0.28);
+  border-radius: 16px; padding: 14px 14px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative; overflow: hidden;
+}
+.banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(400px 120px at 20% 50%, rgba(245,158,11,0.20), transparent 70%);
+  pointer-events: none;
+}
+.left { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
+.gift { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, #fde68a, #f59e0b); font-size: 20px; box-shadow: 0 6px 14px rgba(245,158,11,0.28); }
+.title { font-weight: 900; color: #fde68a; font-size: 15px; }
+.sub { font-size: 12px; color: #e2e8f0; font-weight: 600; opacity: 0.9; }
+.btn { position: relative; z-index: 1; background: linear-gradient(180deg, #fbbf24, #f59e0b); color: #1a0b00; font-weight: 900; border: 1px solid rgba(255,255,255,0.22); padding: 10px 16px; border-radius: 12px; cursor: pointer; box-shadow: 0 8px 16px rgba(245,158,11,0.28); white-space: nowrap; }
+.sparkles { position: absolute; right: 140px; top: 50%; transform: translateY(-50%); color: #fde68a; opacity: 0.6; font-size: 12px; letter-spacing: 6px; }
+@media(max-width:640px){ .banner{flex-direction:column; align-items:stretch} .sparkles{display:none} .btn{width:100%} }

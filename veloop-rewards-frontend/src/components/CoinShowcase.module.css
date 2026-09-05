@@ -1,0 +1,99 @@
+.wrapper { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; }
+.header h2 { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; margin: 0; }
+.header p { margin: 4px 0 0; color: var(--muted); font-size: 13px; font-weight: 500; }
+.dot { width: 8px; height: 8px; border-radius: 999px; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.9); display: inline-block; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 92px 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+.coinCard {
+  position: relative; overflow: hidden;
+  border-radius: 18px; padding: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(28,22,58,0.98), rgba(14,12,30,0.98));
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.ves { border-color: rgba(245,158,11,0.28); }
+.sves { border-color: rgba(56,189,248,0.22); }
+.cardGlowGold { position: absolute; inset: auto -40px -60px -40px; height: 160px; background: radial-gradient(300px 140px at 50% 0%, rgba(245,158,11,0.22), transparent 70%); pointer-events: none; }
+.cardGlowDiamond { position: absolute; inset: auto -40px -60px -40px; height: 160px; background: radial-gradient(300px 140px at 50% 0%, rgba(56,189,248,0.18), transparent 70%); pointer-events: none; }
+
+.topRow { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.badge { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; color: #fde68a; background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.22); padding: 6px 8px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+.badgeDiamond { color: #bae6fd; background: rgba(56,189,248,0.10); border-color: rgba(56,189,248,0.22); }
+.live { font-size: 11px; font-weight: 800; color: #22c55e; }
+.premium { font-size: 11px; font-weight: 800; color: #38bdf8; }
+
+.coinHero { display: flex; align-items: center; gap: 14px; }
+.bigCoinGold, .bigCoinDiamond {
+  width: 88px; height: 88px; border-radius: 999px; display: grid; place-items: center;
+  font-weight: 900; font-size: 18px; flex-shrink: 0; position: relative;
+}
+.bigCoinGold {
+  background: radial-gradient(circle at 30% 20%, #fff7b0 0%, #fde68a 22%, #f59e0b 60%, #92400e 88%);
+  border: 2px solid #fff3a0; color: #7c2d12;
+  box-shadow: 0 14px 26px rgba(245,158,11,0.38), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+.bigCoinDiamond {
+  background: radial-gradient(circle at 30% 20%, #f0f9ff 0%, #e0f2fe 22%, #7dd3fc 45%, #0ea5e9 70%, #0c4a6e 90%);
+  border: 2px solid #e0f2fe; color: #0c4a6e;
+  box-shadow: 0 14px 26px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.85);
+}
+.coinHero h3 { margin: 0; font-size: 22px; font-weight: 900; letter-spacing: -0.02em; }
+.tagline { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+.price { margin-top: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.priceBig { font-weight: 900; color: #fbbf24; font-size: 13px; }
+.priceBigDiamond { font-weight: 900; color: #38bdf8; font-size: 13px; }
+.priceMuted { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+.perks { display: flex; flex-direction: column; gap: 8px; }
+.perk, .perkDiamond {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px; font-weight: 600; color: #e2e8f0;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  padding: 9px 10px; border-radius: 12px;
+}
+.perkDiamond { background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.12); }
+.perk svg { color: #f59e0b; }
+.perkDiamond svg { color: #38bdf8; }
+
+.actions { display: flex; gap: 10px; margin-top: auto; }
+.primaryGold, .primaryDiamond, .ghost {
+  flex: 1; border-radius: 12px; padding: 10px 12px; font-weight: 800; font-size: 13px; cursor: pointer; transition: all .2s;
+}
+.primaryGold { background: linear-gradient(180deg, #f59e0b, #d97706); color: #1a0b00; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 18px rgba(245,158,11,0.32); }
+.primaryGold:hover { transform: translateY(-1px); box-shadow: 0 12px 22px rgba(245,158,11,0.42); }
+.primaryDiamond { background: linear-gradient(180deg, #0ea5e9, #0369a1); color: #fff; border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 8px 18px rgba(14,165,233,0.32); }
+.primaryDiamond:hover { transform: translateY(-1px); }
+.ghost { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); color: #fff; }
+.ghost:hover { background: rgba(255,255,255,0.10); }
+
+.floatCoins { position: absolute; right: 12px; bottom: 62px; display: flex; gap: 8px; pointer-events: none; opacity: 0.9; }
+.fCoin1, .fCoin2 { font-size: 10px; font-weight: 900; padding: 6px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); }
+.fCoin1 { background: rgba(245,158,11,0.18); color: #fde68a; }
+.fCoin2 { background: rgba(34,197,94,0.14); color: #bbf7d0; }
+
+.exchange { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; position: relative; }
+.exchangeIcon { width: 44px; height: 44px; border-radius: 999px; display: grid; place-items: center; background: linear-gradient(180deg, #1f163d, #0f0a1e); border: 1px solid rgba(124,58,237,0.35); box-shadow: 0 8px 18px rgba(124,58,237,0.25); color: #c4b5fd; }
+.exchangeCard { background: rgba(124,58,237,0.10); border: 1px solid rgba(124,58,237,0.22); border-radius: 14px; padding: 10px 12px; text-align: center; width: 100%; }
+.exchangeLabel { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; color: #c4b5fd; }
+.exchangeRate { font-weight: 900; font-size: 13px; color: #fff; margin-top: 2px; }
+.exchangeHint { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+.vLine { position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(124,58,237,0.25), transparent); z-index: -1; }
+
+.apyRibbon {
+  margin-top: 2px; text-align: center; font-size: 11px; font-weight: 900; letter-spacing: 0.10em; color: #bae6fd;
+  background: linear-gradient(90deg, rgba(56,189,248,0.14), rgba(124,58,237,0.14));
+  border: 1px solid rgba(56,189,248,0.18); padding: 7px 8px; border-radius: 999px;
+}
+
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: 1fr; }
+  .exchange { flex-direction: row; }
+  .vLine { display: none; }
+  .exchangeCard { flex: 1; }
+}

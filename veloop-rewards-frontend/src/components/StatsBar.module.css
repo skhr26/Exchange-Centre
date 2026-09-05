@@ -1,0 +1,51 @@
+.bar {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr 1px 1.35fr;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(180deg, rgba(18,16,38,0.98), rgba(12,10,26,0.98));
+  border: 1px solid rgba(124,58,237,0.20);
+  border-radius: 16px;
+  padding: 14px 14px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
+  position: relative;
+}
+.bar::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.5), transparent);
+}
+.stat { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.iconWrap {
+  width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,0.08); flex-shrink: 0;
+}
+.gold { background: radial-gradient(circle at 30% 20%, #fde68a, #f59e0b 65%); color: #5a2e00; box-shadow: 0 6px 14px rgba(245,158,11,0.28); }
+.purple { background: radial-gradient(circle at 30% 20%, #ddd6fe, #7c3aed 65%); color: #fff; box-shadow: 0 6px 14px rgba(124,58,237,0.28); }
+.blue { background: radial-gradient(circle at 30% 20%, #bfdbfe, #2563eb 65%); color: #fff; }
+.green { background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a 65%); color: #fff; }
+.meta { line-height: 1.1; min-width: 0; }
+.label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+.value { font-size: 18px; font-weight: 900; letter-spacing: -0.02em; margin-top: 2px; }
+.divider { width: 1px; height: 42px; background: rgba(255,255,255,0.08); }
+.progressWrap { display: flex; align-items: center; gap: 14px; justify-content: space-between; }
+.progressMeta { flex: 1; min-width: 0; }
+.progressLabel { font-size: 11px; color: var(--muted); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.progressTrack { height: 6px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin: 7px 0 6px; }
+.progressFill { width: 42%; height: 100%; background: linear-gradient(90deg, #7c3aed, #f59e0b, #fbbf24); border-radius: 999px; box-shadow: 0 0 10px rgba(245,158,11,0.45); }
+.progressSub { font-size: 11px; color: var(--muted); font-weight: 600; }
+.circle { position: relative; width: 58px; height: 58px; display: grid; place-items: center; flex-shrink: 0; }
+.circle svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.bgRing { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 4; }
+.fgRing { fill: none; stroke: #f59e0b; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 113; stroke-dashoffset: 65; filter: drop-shadow(0 0 8px rgba(245,158,11,0.5)); }
+.circle span { font-weight: 900; font-size: 13px; }
+
+@media (max-width: 1100px) {
+  .bar { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .divider { display: none; }
+  .progressWrap { grid-column: 1 / -1; background: rgba(255,255,255,0.04); border-radius: 12px; padding: 10px 12px; border: 1px solid rgba(255,255,255,0.06); }
+}
+@media (max-width: 560px) {
+  .bar { grid-template-columns: 1fr 1fr; }
+  .value { font-size: 16px; }
+}

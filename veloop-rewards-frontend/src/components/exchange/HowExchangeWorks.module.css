@@ -1,0 +1,11 @@
+.panel { border-radius: 18px; padding: 22px 20px; background: linear-gradient(180deg, rgba(28,22,58,0.96), rgba(16,14,34,0.98)); border: 1px solid rgba(124,58,237,0.2); box-shadow: 0 10px 28px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.05); }
+.title { margin: 0; font-size: 17px; font-weight: 800; color: #fff; }
+.sub { margin: 4px 0 16px; font-size: 13px; color: #9aa0bd; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.step { position: relative; background: rgba(7,6,16,0.5); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px; }
+.stepNum { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; color: #a78bfa; }
+.stepIcon { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: rgba(124,58,237,0.18); border: 1px solid rgba(124,58,237,0.35); color: #c4b5fd; }
+.stepTitle { font-size: 13px; font-weight: 800; color: #fff; }
+.stepText { font-size: 12px; color: #9aa0bd; line-height: 1.5; margin-top: 3px; }
+@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }

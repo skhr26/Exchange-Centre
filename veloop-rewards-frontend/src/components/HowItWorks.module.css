@@ -1,0 +1,99 @@
+.container {
+  margin-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.stepsWrapper {
+  position: relative;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.stepsLine {
+  position: absolute;
+  top: 35px; /* Exactly half of iconOuter's 70px height */
+  left: 12.5%;
+  right: 12.5%;
+  height: 4px;
+  background-color: var(--panel-border);
+  z-index: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1;
+  flex: 1;
+}
+
+.iconOuter {
+  width: 70px;
+  height: 70px;
+  background: var(--bg-color);
+  border: 4px solid var(--panel-border);
+  box-shadow: 4px 4px 0px var(--panel-border);
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.step:hover .iconOuter {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+.iconInner {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-yellow);
+  border: 2px solid var(--panel-border);
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconBlue {
+  color: var(--text-main);
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .iconOuter { width: 60px; height: 60px; }
+  .iconInner { width: 38px; height: 38px; }
+  .stepsLine { top: 30px; }
+  .label { font-size: 0.85rem; }
+}
+
+@media (max-width: 576px) {
+  .iconOuter { width: 44px; height: 44px; }
+  .iconInner { width: 28px; height: 28px; }
+  .iconInner svg { width: 16px; height: 16px; }
+  .stepsLine { top: 22px; }
+  .label { font-size: 0.7rem; }
+  .step { gap: 0.5rem; }
+  .container { padding-bottom: 2rem; }
+}

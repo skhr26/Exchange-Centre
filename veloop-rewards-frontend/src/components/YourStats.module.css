@@ -1,0 +1,11 @@
+.wrap { margin-top: 2px; }
+.title { font-size: 14px; font-weight: 900; margin: 0 0 10px; display: flex; align-items: center; gap: 6px; }
+.title::before { content: '↗'; color: #a78bfa; font-size: 12px; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.top { display: flex; justify-content: space-between; align-items: flex-start; }
+.value { font-size: 16px; font-weight: 900; letter-spacing: -0.02em; }
+.label { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+.delta { font-size: 11px; font-weight: 800; color: #22c55e; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.18); padding: 3px 6px; border-radius: 999px; }
+.chart { width: 100%; height: 28px; margin-top: 12px; display: block; }
+@media(max-width:980px){ .grid{grid-template-columns: repeat(2, 1fr);} }
+@media(max-width:560px){ .grid{grid-template-columns: 1fr;} }

@@ -1,0 +1,11 @@
+{
+  "name": "veloop-rewards-backend",
+  "version": "1.0.0",
+  "description": "VELOOP Rewards — Exchange Center backend. Authoritative balances + validated Gem → VE conversions. Zero dependencies (Node built-ins only).",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}
