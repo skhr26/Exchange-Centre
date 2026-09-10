@@ -3,14 +3,23 @@
 Premium **Reward Conversion Vault**: convert earned **Gems → VEs** through
 predefined, server-validated exchange opportunities. Not a crypto/trading UI.
 
-Live concept: hero → balance overview → available conversions → how it works →
+Live concept: sidebar + hero → balance strip (Gems + VEs) → Enter Gems Amount
+converter → how it works → available conversions (sortable) → trust badges →
 recent conversions → exchange rules.
 
 ## Features
 
 - Premium header with Gem → VE vault visual + floating gems
-- Balance overview (**275 Gems / 500 VEs** initial, loaded from backend)
+- App shell with sidebar nav (Dashboard, Earn Gems, Exchange Center, …) + promo
+  card, topbar with notifications + profile, drawer navigation on mobile
+- Combined balance strip (**275 Gems / 500 VEs** initial, loaded from backend):
+  Available Gems on the left, Available VEs on the right
+- Enter Gems Amount converter: type Gems (MAX shortcut) → matched to the best
+  predefined option it unlocks → VEs preview + per-option rate (1 Gem = x VEs)
+  → Preview Conversion opens the server-verified confirm modal
 - 6 conversion cards (28→151, 39→168, 25→120, 55→310, 120→690, 300→1750)
+  with rate line, badges (Most Popular / Best Value / High Conversion),
+  sort (Recommended / Lowest Gems / Highest VEs), Convert Now + Watch Ad link
 - Confirm modal with **server-computed** after-balances, insufficient-Gems state
   ("Earn More Gems"), success state with confetti, `Converting…` locked button
 - Recent conversions with Completed / Processing / Failed badges
@@ -37,10 +46,13 @@ Earn Gems → Choose Conversion → Review Exchange → Confirm → Receive VEs.
 
 ```
 src/components/exchange/
-  ExchangeHero.jsx · BalanceOverview.jsx · ExchangeCard.jsx · ExchangeModal.jsx
+  ExchangeSidebar.jsx · ExchangeTopbar.jsx · ExchangeHero.jsx · BalanceOverview.jsx
+  AmountConverter.jsx · ExchangeCard.jsx · ExchangeModal.jsx
   ExchangeHistory.jsx · ExchangeRules.jsx · HowExchangeWorks.jsx · ExchangeLoader.jsx
+  TrustBadges.jsx
 src/pages/ExchangeCenter/ExchangeCenter.jsx
 src/services/exchangeApi.js
+src/utils/exchange.js
 src/data/exchangeData.js
 ```
 

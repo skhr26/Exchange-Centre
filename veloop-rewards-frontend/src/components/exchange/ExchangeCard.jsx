@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
-import { Gem, Coins, ArrowDown, Lock } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Gem, ArrowRight, Info, Lock, Play } from "lucide-react";
 import styles from "./ExchangeCard.module.css";
+import { gemRate } from "../../utils/exchange";
+import { INFO_COPY } from "../../data/exchangeData";
 
-export default function ExchangeCard({ option, gems, busy, onConvert, index = 0 }) {
+export default function ExchangeCard({ option, badge, gems, busy, onConvert, index = 0 }) {
   const eligible = gems >= option.requiredGems;
   const needed = Math.max(0, option.requiredGems - gems);
   const locked = !eligible;
@@ -15,22 +18,20 @@ export default function ExchangeCard({ option, gems, busy, onConvert, index = 0 
       transition={{ duration: 0.35, delay: Math.min(index * 0.06, 0.3) }}
       whileHover={locked ? {} : { y: -5 }}
     >
-      <span className={styles.tag}>{option.tag}</span>
-      <div className={styles.head}>
-        <span className={styles.vaultIcon} aria-hidden="true">🎁</span>
-        <div>
-          <div className={styles.rewardType}>{option.rewardType}</div>
-          <div className={styles.title}>{option.title}</div>
-        </div>
+      {badge && <span className={styles.tag}>{badge}</span>}
+      <div className={styles.visualRow} aria-hidden="true">
+        <span className={styles.gemMini}><Gem size={20} /></span>
+        <ArrowRight size={17} className={styles.miniArrow} />
+        <span className={styles.veMini}>VE</span>
       </div>
 
-      <div className={styles.conversion} aria-label={`${option.requiredGems} Gems converts to ${option.receiveVEs} VEs`}>
-        <div className={styles.gemRow}><Gem size={16} /> {option.requiredGems} Gems</div>
-        <div className={styles.arrowRow}>
-          <span className={styles.arrowBadge}><ArrowDown size={14} /></span>
-          <span className={styles.convLabel}>Reward conversion</span>
-        </div>
-        <div className={styles.veRow}><Coins size={16} /> {option.receiveVEs} VEs</div>
+      <div className={styles.amounts}>
+        <span className={styles.gemAmount}>{option.requiredGems} Gems</span>
+        <span className={styles.veAmount}>{option.receiveVEs} VEs</span>
+      </div>
+      <div className={styles.rateLine}>
+        1 Gem = {gemRate(option)} VEs
+        <span className={styles.rateInfo} title={INFO_COPY.rate}><Info size={13} /></span>
       </div>
 
       <p className={styles.desc}>{option.description}</p>
@@ -52,8 +53,11 @@ export default function ExchangeCard({ option, gems, busy, onConvert, index = 0 
         onClick={() => !locked && onConvert(option)}
         aria-label={locked ? `Earn more gems to unlock ${option.title}` : `Convert ${option.requiredGems} Gems into ${option.receiveVEs} VEs`}
       >
-        {busy ? "Converting…" : locked ? "Earn More Gems" : "Convert Rewards"}
+        {busy ? "Converting…" : locked ? "Earn More Gems" : "Convert Now"}
       </button>
+      <Link to="/watch-ads" className={styles.watchLink}>
+        <Play size={12} /> Watch Ad to proceed
+      </Link>
     </motion.article>
   );
 }

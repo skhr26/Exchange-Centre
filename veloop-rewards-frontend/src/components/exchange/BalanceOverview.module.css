@@ -1,33 +1,101 @@
-.grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-.card {
-  position: relative; overflow: hidden; border-radius: 18px; padding: 20px;
-  background: linear-gradient(180deg, rgba(28, 22, 58, 0.96), rgba(16, 14, 34, 0.98));
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+/* Combined Gems + VEs balance strip, inspired by the Exchange Center reference:
+   one panel, Gems on the left, VEs on the right, both clearly visible. */
+.strip {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  border-radius: 18px;
+  padding: 22px 26px 16px;
+  background: linear-gradient(180deg, rgba(26, 20, 52, 0.97), rgba(15, 13, 30, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
-.gemCard { border-top: 2px solid rgba(167, 139, 250, 0.6); }
-.veCard { border-top: 2px solid rgba(251, 191, 36, 0.65); }
-.noteCard { border-top: 2px solid rgba(34, 197, 94, 0.5); }
-.cardTop { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.iconBadge {
-  width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; flex: none;
+.half { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.half:last-of-type { justify-content: flex-end; text-align: left; }
+
+.tokenIcon {
+  width: 62px; height: 62px; border-radius: 999px; flex: none;
+  display: grid; place-items: center;
 }
-.gemCard .iconBadge { background: linear-gradient(135deg, #7c3aed, #4c1d95); color: #fff; box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4); }
-.veCard .iconBadge { background: linear-gradient(135deg, #fbbf24, #b45309); color: #1a0b00; box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35); }
-.label { font-size: 13px; font-weight: 700; color: #c9cdea; display: inline-flex; align-items: center; gap: 6px; }
-.value { font-size: 30px; font-weight: 800; color: #fff; letter-spacing: -0.02em; min-height: 40px; display: flex; align-items: center; }
-.sub { margin-top: 6px; font-size: 12px; color: #9aa0bd; font-weight: 500; }
-.shimmer { display: inline-block; width: 120px; height: 26px; border-radius: 8px; background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0.06) 75%); background-size: 200% 100%; animation: sh 1.2s linear infinite; }
+.gemIcon {
+  color: #c084fc;
+  background: radial-gradient(circle at 35% 30%, rgba(192, 132, 252, 0.28), rgba(20, 12, 40, 0.9) 70%);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 26px rgba(168, 85, 247, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: floaty 4.5s ease-in-out infinite;
+}
+.veIcon {
+  font-weight: 900; font-size: 21px; letter-spacing: 0.02em; color: #dbeafe;
+  background: radial-gradient(circle at 35% 30%, #3b82f6, #1e3a8a 75%);
+  border: 2px solid rgba(96, 165, 250, 0.65);
+  box-shadow: 0 0 26px rgba(59, 130, 246, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  animation: floaty 4.5s ease-in-out 0.9s infinite;
+}
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+.meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.label { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: #c9cdea; white-space: nowrap; }
+.amount { font-size: 31px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+.gemAmount { color: #c084fc; text-shadow: 0 0 22px rgba(168, 85, 247, 0.45); }
+.veAmount { color: #60a5fa; text-shadow: 0 0 22px rgba(59, 130, 246, 0.45); }
+.unit { font-size: 12px; font-weight: 600; color: #9aa0bd; }
+
+.divider { width: 1px; align-self: stretch; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.12), transparent); }
+
+.shimmer {
+  display: inline-block; width: 110px; height: 28px; border-radius: 8px; vertical-align: middle;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0.06) 75%);
+  background-size: 200% 100%; animation: sh 1.2s linear infinite;
+}
 @keyframes sh { to { background-position: -200% 0; } }
+
 .tipWrap { position: relative; display: inline-flex; }
-.infoBtn { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #c4b5fd; cursor: pointer; }
+.infoBtn {
+  display: grid; place-items: center; width: 20px; height: 20px;
+  border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06); color: #c4b5fd; cursor: pointer;
+}
 .infoBtn:focus-visible { outline: 2px solid #a78bfa; outline-offset: 2px; }
-.tip { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); width: 220px; padding: 10px 12px; font-size: 12px; line-height: 1.5; background: #221c4e; color: #f1edff; border: 1px solid rgba(167,139,250,0.35); border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); z-index: 5; }
-.noteTitle { font-size: 13px; font-weight: 800; color: #86efac; letter-spacing: 0.04em; }
-.noteText { font-size: 13px; color: #9aa0bd; line-height: 1.6; margin: 8px 0 12px; }
-.resetBtn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #e9e4ff; background: rgba(124,58,237,0.16); border: 1px solid rgba(124,58,237,0.35); padding: 8px 12px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
-.resetBtn:hover:not(:disabled) { background: rgba(124,58,237,0.28); }
+.tip {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  width: 220px; padding: 10px 12px; font-size: 12px; line-height: 1.5; font-weight: 500;
+  background: #221c4e; color: #f1edff; border: 1px solid rgba(167, 139, 250, 0.35);
+  border-radius: 12px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); z-index: 5;
+}
+
+.footer {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-top: 10px; padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.verified { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #86efac; }
+.resetBtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; color: #e9e4ff;
+  background: rgba(124, 58, 237, 0.16); border: 1px solid rgba(124, 58, 237, 0.35);
+  padding: 7px 12px; border-radius: 10px; cursor: pointer; transition: background 0.2s;
+}
+.resetBtn:hover:not(:disabled) { background: rgba(124, 58, 237, 0.28); }
 .resetBtn:disabled { opacity: 0.6; cursor: not-allowed; }
 .resetBtn:focus-visible { outline: 2px solid #a78bfa; outline-offset: 2px; }
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .noteCard { grid-column: 1 / -1; } }
-@media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+/* Tablet: tighten */
+@media (max-width: 760px) {
+  .strip { padding: 18px 16px 14px; }
+  .half { gap: 12px; }
+  .tokenIcon { width: 52px; height: 52px; }
+  .veIcon { font-size: 17px; }
+  .amount { font-size: 25px; }
+  .label { font-size: 11.5px; }
+}
+
+/* Small phones: stack Gems above VEs so both stay clearly readable */
+@media (max-width: 420px) {
+  .strip { grid-template-columns: 1fr; gap: 14px; }
+  .divider { width: auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent); }
+  .half:last-of-type { justify-content: flex-start; }
+  .footer { flex-direction: column; align-items: flex-start; }
+}

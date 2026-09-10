@@ -1,0 +1,62 @@
+.panel {
+  border-radius: 18px; padding: 20px;
+  background: linear-gradient(180deg, rgba(26,20,52,0.97), rgba(15,13,30,0.98));
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.title { margin: 0 0 14px; font-size: 15px; font-weight: 700; color: #fff; }
+.row { display: grid; grid-template-columns: 1fr auto 1fr auto; gap: 12px; align-items: stretch; }
+.field {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(7,6,16,0.6); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px; padding: 12px 14px; min-width: 0;
+}
+.field:focus-within { border-color: rgba(167,139,250,0.5); box-shadow: 0 0 0 3px rgba(124,58,237,0.15); }
+.gemIcon { color: #c084fc; flex: none; }
+.inputWrap { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.input {
+  background: transparent; border: none; outline: none; width: 100%;
+  font-size: 24px; font-weight: 800; color: #fff; padding: 0;
+}
+.input::placeholder { color: rgba(255,255,255,0.35); }
+.fieldCaption, .veLabel { font-size: 11px; color: #9aa0bd; font-weight: 500; }
+.maxBtn {
+  flex: none; font-size: 10px; font-weight: 800; letter-spacing: 0.06em;
+  color: #c9cdea; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14); border-radius: 8px; padding: 6px 10px; cursor: pointer;
+}
+.maxBtn:hover { background: rgba(255,255,255,0.12); }
+.maxBtn:focus-visible { outline: 2px solid #a78bfa; outline-offset: 2px; }
+.swapBadge {
+  align-self: center; width: 40px; height: 40px; border-radius: 999px;
+  display: grid; place-items: center; color: #c9cdea;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+}
+.veCount { font-size: 24px; font-weight: 800; color: #60a5fa; }
+.veCoin {
+  flex: none; width: 34px; height: 34px; border-radius: 999px;
+  display: grid; place-items: center; font-size: 11px; font-weight: 900; color: #dbeafe;
+  background: radial-gradient(circle at 35% 30%, #3b82f6, #1e3a8a 75%);
+  border: 1px solid rgba(96,165,250,0.6);
+}
+.previewBtn {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  font-size: 14px; font-weight: 800; color: #fff;
+  background: linear-gradient(180deg, #7c3aed, #5b21b6);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 0 22px; cursor: pointer;
+  box-shadow: 0 8px 20px rgba(124,58,237,0.35);
+}
+.previewBtn:hover:not(:disabled) { background: linear-gradient(180deg, #8b5cf6, #6d28d9); }
+.previewBtn:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: none; }
+.previewBtn:focus-visible { outline: 2px solid #a78bfa; outline-offset: 2px; }
+.rateRow { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 12px; }
+.rate { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #c4b5fd; }
+.rateInfo { display: inline-flex; color: #a78bfa; cursor: help; }
+.matchedTag { font-size: 11px; font-weight: 700; color: #86efac; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); padding: 3px 10px; border-radius: 999px; }
+.hint { font-size: 12.5px; color: #9aa0bd; }
+.warn { font-size: 12px; font-weight: 600; color: #fca5a5; }
+@media (max-width: 860px) {
+  .row { grid-template-columns: 1fr; }
+  .swapBadge { justify-self: center; transform: rotate(90deg); }
+  .previewBtn { justify-content: center; padding: 13px; }
+}

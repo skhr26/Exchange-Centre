@@ -1,18 +1,22 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Info, RotateCcw, AlertTriangle, PackageOpen } from "lucide-react";
-import Header from "../../components/Header";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Info, RotateCcw, AlertTriangle, PackageOpen, ArrowDownUp } from "lucide-react";
+import ExchangeSidebar from "../../components/exchange/ExchangeSidebar";
+import ExchangeTopbar from "../../components/exchange/ExchangeTopbar";
 import ExchangeHero from "../../components/exchange/ExchangeHero";
 import BalanceOverview from "../../components/exchange/BalanceOverview";
+import AmountConverter from "../../components/exchange/AmountConverter";
 import ExchangeCard from "../../components/exchange/ExchangeCard";
 import ExchangeModal from "../../components/exchange/ExchangeModal";
 import ExchangeHistory from "../../components/exchange/ExchangeHistory";
 import ExchangeRules from "../../components/exchange/ExchangeRules";
 import HowExchangeWorks from "../../components/exchange/HowExchangeWorks";
 import ExchangeLoader from "../../components/exchange/ExchangeLoader";
+import TrustBadges from "../../components/exchange/TrustBadges";
 import { exchangeApi, newIdempotencyKey } from "../../services/exchangeApi";
 import { INFO_COPY } from "../../data/exchangeData";
 import styles from "./ExchangeCenter.module.css";
+
+const rateOf = (o) => o.receiveVEs / o.requiredGems;
 
 export default function ExchangeCenter() {
   const [balances, setBalances] = useState({ gems: 275, ves: 500 });
@@ -28,6 +32,8 @@ export default function ExchangeCenter() {
   const [busy, setBusy] = useState(false); // global single-flight lock (prevents double conversion)
   const [resetting, setResetting] = useState(false);
   const [toast, setToast] = useState("");
+  const [navOpen, setNavOpen] = useState(false);
+  const [sort, setSort] = useState("recommended");
   const attemptKey = useRef(null);
 
   const loadAll = useCallback(async () => {
@@ -58,6 +64,25 @@ export default function ExchangeCenter() {
     const t = setTimeout(() => setToast(""), 3200);
     return () => clearTimeout(t);
   }, [toast]);
+
+  // Card badges derived from backend values (presentation only).
+  const badges = useMemo(() => {
+    if (options.length === 0) return {};
+    const best = options.reduce((a, b) => (rateOf(b) > rateOf(a) ? b : a));
+    const max = options.reduce((a, b) => (b.receiveVEs > a.receiveVEs ? b : a));
+    const map = {};
+    map[options[0].id] = "🔥 Most Popular";
+    if (!map[best.id]) map[best.id] = "⭐ Best Value";
+    if (!map[max.id]) map[max.id] = "↗ High Conversion";
+    return map;
+  }, [options]);
+
+  const sortedOptions = useMemo(() => {
+    const list = [...options];
+    if (sort === "gems-asc") list.sort((a, b) => a.requiredGems - b.requiredGems);
+    else if (sort === "ves-desc") list.sort((a, b) => b.receiveVEs - a.receiveVEs);
+    return list;
+  }, [options, sort]);
 
   // Open modal + fetch server-side preview (backend-proof after-balances)
   const handleConvert = async (option) => {
@@ -146,44 +171,26 @@ export default function ExchangeCenter() {
   };
 
   return (
-    <div className={styles.page}>
-      <Header />
-      <main className={styles.main}>
-        <Link to="/watch-ads" className={styles.backLink}>
-          <ArrowLeft size={15} /> Back to Watch Ads
-        </Link>
+    <div className={styles.shell}>
+      <ExchangeSidebar open={navOpen} onClose={() => setNavOpen(false)} />
+      <div className={styles.body}>
+        <ExchangeTopbar onMenu={() => setNavOpen(true)} />
+        <main className={styles.main}>
+          <ExchangeHero />
 
-        <ExchangeHero />
+          <BalanceOverview
+            gems={balances.gems}
+            ves={balances.ves}
+            loading={phase === "loading"}
+            onReset={handleReset}
+            resetting={resetting}
+          />
 
-        <BalanceOverview
-          gems={balances.gems}
-          ves={balances.ves}
-          loading={phase === "loading"}
-          onReset={handleReset}
-          resetting={resetting}
-        />
-
-        {toast && (
-          <div className={styles.toast} role="status">
-            <span className={styles.toastIcon}>✓</span> {toast}
-          </div>
-        )}
-
-        <section className={styles.section} aria-label="Available conversions">
-          <div className={styles.sectionHead}>
-            <div>
-              <h2 className={styles.sectionTitle}>Available Conversions</h2>
-              <p className={styles.sectionSub}>
-                Select a conversion → review → confirm → receive VEs{" "}
-                <span className={styles.inlineInfo} title={INFO_COPY.rate}>
-                  <Info size={13} />
-                </span>
-              </p>
+          {toast && (
+            <div className={styles.toast} role="status">
+              <span className={styles.toastIcon}>✓</span> {toast}
             </div>
-            <span className={styles.countPill}>
-              {options.length} option{options.length === 1 ? "" : "s"}
-            </span>
-          </div>
+          )}
 
           {phase === "loading" && <ExchangeLoader />}
 
@@ -199,37 +206,77 @@ export default function ExchangeCenter() {
             </div>
           )}
 
-          {phase === "empty" && (
-            <div className={styles.stateBox}>
-              <span className={styles.stateIcon}><PackageOpen size={26} /></span>
-              <h3>No conversions available right now.</h3>
-              <p>New reward conversion opportunities will appear here when available.</p>
-            </div>
+          {phase !== "loading" && phase !== "error" && (
+            <>
+              <AmountConverter
+                options={options}
+                balance={balances.gems}
+                busy={busy}
+                onPreview={handleConvert}
+              />
+
+              <HowExchangeWorks />
+
+              <section className={styles.section} aria-label="Available conversions">
+                <div className={styles.sectionHead}>
+                  <div>
+                    <h2 className={styles.sectionTitle}>✨ Available Conversions</h2>
+                    <p className={styles.sectionSub}>
+                      Choose the best conversion option for your Gems.{" "}
+                      <span className={styles.inlineInfo} title={INFO_COPY.rate}>
+                        <Info size={13} />
+                      </span>
+                    </p>
+                  </div>
+                  <label className={styles.sortWrap}>
+                    <ArrowDownUp size={13} />
+                    <span className={styles.sortLabel}>Sort by:</span>
+                    <select
+                      className={styles.sortSelect}
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value)}
+                      aria-label="Sort conversions"
+                    >
+                      <option value="recommended">Recommended</option>
+                      <option value="gems-asc">Lowest Gems</option>
+                      <option value="ves-desc">Highest VEs</option>
+                    </select>
+                  </label>
+                </div>
+
+                {phase === "empty" ? (
+                  <div className={styles.stateBox}>
+                    <span className={styles.stateIcon}><PackageOpen size={26} /></span>
+                    <h3>No conversions available right now.</h3>
+                    <p>New reward conversion opportunities will appear here when available.</p>
+                  </div>
+                ) : (
+                  <div className={styles.grid}>
+                    {sortedOptions.map((opt, i) => (
+                      <ExchangeCard
+                        key={opt.id}
+                        option={opt}
+                        badge={badges[opt.id]}
+                        gems={balances.gems}
+                        busy={busy}
+                        index={i}
+                        onConvert={handleConvert}
+                      />
+                    ))}
+                  </div>
+                )}
+              </section>
+
+              <TrustBadges />
+
+              <div className={styles.twoCol}>
+                <ExchangeHistory items={history} />
+                <ExchangeRules />
+              </div>
+            </>
           )}
-
-          {phase === "ready" && (
-            <div className={styles.grid}>
-              {options.map((opt, i) => (
-                <ExchangeCard
-                  key={opt.id}
-                  option={opt}
-                  gems={balances.gems}
-                  busy={busy}
-                  index={i}
-                  onConvert={handleConvert}
-                />
-              ))}
-            </div>
-          )}
-        </section>
-
-        <HowExchangeWorks />
-
-        <div className={styles.twoCol}>
-          <ExchangeHistory items={history} />
-          <ExchangeRules />
-        </div>
-      </main>
+        </main>
+      </div>
 
       <ExchangeModal
         open={modalOpen}
